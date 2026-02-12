@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Zomato Chennai · Home Swiper + Separate Pages</title>
+  
+  <!-- Font Awesome Icons (bottom nav, UI) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Swiper.js CSS (touch slider) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+ 
+</head>
+<body>
+
+  <!-- animated food background (global) -->
+  <div class="food-bg-global">
+    <div class="food-float" style="top:5%; left:-5%; animation-delay:-1s;">🍕</div>
+    <div class="food-float" style="top:25%; left:-15%; animation-delay:-7s;">🍔</div>
+    <div class="food-float" style="top:55%; left:-8%; animation-delay:-4s;">🌮</div>
+    <div class="food-float" style="top:75%; left:-20%; animation-delay:-13s;">🍛</div>
+    <div class="food-float" style="top:15%; left:-22%; animation-delay:-19s;">🥗</div>
+  </div>
+
+  <!-- ========== PAGE CONTAINER ========= -->
+  <div class="page-container">
+
+    <!-- ========== HEADER (same on all pages) ========= -->
+    <header class="main-header">
+      <div class="logo">
+        <h1><i class="fas fa-utensils"></i> Chennai Zomato</h1>
+        <p>India's #1 Food Delivery</p>
+      </div>
+      <!-- desktop navigation -->
+      <ul class="desktop-nav">
+        <li><a href="#" class="nav-desk-link active-nav" data-page="home-page">Home</a></li>
+        <li><a href="#" class="nav-desk-link" data-page="order-page">Order Food</a></li>
+        <li><a href="#" class="nav-desk-link" data-page="services-page">Services</a></li>
+        <li><a href="#" class="nav-desk-link" data-page="contact-page">Contact</a></li>
+      </ul>
+      <!-- cart icon -->
+      <div class="cart-icon" id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </div>
+    </header>
+
+    <!-- ========== 4 SEPARATE PAGES ========== -->
+
+    <!-- ---------- HOME PAGE (with SWIPER slider) ---------- -->
+    <div id="home-page" class="page active-page">
+      <!-- hero -->
+      <div style="background: linear-gradient(rgba(203,32,45,0.9), rgba(158,27,36,0.95)), center/cover; padding: 3.5rem 5%; text-align: center; color: white;">
+        <h2 style="font-size: 2.5rem;">Craving Something?</h2>
+        <p style="font-size: 1.3rem; margin: 1rem 0 2rem;">Discover best restaurants in Chennai</p>
+        <button class="btn" onclick="switchPage('order-page')"><i class="fas fa-search"></i> Order Now</button>
+        <button class="btn btn-outline" style="background:transparent; border:2px solid #ffd700; color:white; margin-left:1rem;" onclick="scrollToCustom()">Custom Meal</button>
+      </div>
+
+      <div style="padding: 0 3% 1rem;">
+        <!-- ===== SWIPER SECTION: TRENDING DISHES ===== -->
+        <div class="section-title">
+          <h3>🔥 TRENDING DISHES</h3>
+          <p>Handpicked favorites – swipe to explore</p>
+        </div>
+
+        <!-- Swiper wrapper -->
+        <div class="swiper-container" id="trendingSwiper">
+          <div class="swiper-wrapper" id="swiperWrapper">
+            <!-- slides will be injected via JS from featured products -->
+          </div>
+          <!-- pagination bullets -->
+          <div class="swiper-pagination"></div>
+        </div>
+
+        <!-- Custom meal section (only on home) -->
+        <div id="custom-meal-block" class="custom-order-section">
+          <div>
+            <h3 style="color: var(--primary-dark); font-size: 2rem;">🍲 CUSTOMIZE YOUR MEAL</h3>
+            <p style="font-size: 1.1rem; margin: 1rem 0;">Tell us your cravings & dietary needs. We’ll prepare it from top chefs.</p>
+            <button class="btn" onclick="submitMealRequest()">Get Free Quote</button>
+          </div>
+          <div class="order-form">
+            <input type="text" id="mealName" placeholder="Full Name">
+            <input type="email" id="mealEmail" placeholder="Email">
+            <input type="tel" id="mealPhone" placeholder="Phone">
+            <select id="mealCuisine">
+              <option value="">Select Cuisine</option>
+              <option value="north">North Indian</option>
+              <option value="south">South Indian</option>
+              <option value="chinese">Chinese</option>
+            </select>
+            <textarea id="mealDetails" rows="2" placeholder="Your meal idea..."></textarea>
+            <button class="btn" style="width:100%;" onclick="submitMealRequest()">Request Custom Meal</button>
+          </div>
+        </div>
+
+        <!-- process steps -->
+        <div class="section-title"><h3>⚡ HOW IT WORKS</h3></div>
+        <div style="display: grid; grid-template-columns: repeat(5,1fr); gap:1.2rem; margin:2rem 0;">
+          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-search"></i></div><h4>SEARCH</h4></div>
+          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-cart-plus"></i></div><h4>ORDER</h4></div>
+          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-fire"></i></div><h4>COOK</h4></div>
+          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-motorcycle"></i></div><h4>DELIVERY</h4></div>
+          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-utensils"></i></div><h4>ENJOY</h4></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- ORDER FOOD PAGE (separate) ---------- -->
+    <div id="order-page" class="page">
+      <div style="background: linear-gradient(145deg, var(--primary), var(--primary-dark)); padding: 3rem 5%; text-align: center; color: white;">
+        <h2 style="font-size: 2.3rem;"><i class="fas fa-pizza-slice"></i> Order Delicious Food</h2>
+        <p>From biryani to pizza – delivered hot & fresh</p>
+      </div>
+      
+      <!-- search bar -->
+      <div class="search-area">
+        <div class="search-box">
+          <input type="text" id="orderSearchInput" class="search-input" placeholder="🔍 Biryani, Pizza, Dosa..." autocomplete="off" onkeyup="handleSearchKeyUp(event)">
+          <button class="search-btn" onclick="performOrderSearch()"><i class="fas fa-search"></i> Search</button>
+        </div>
+        <div id="orderSearchResults" class="search-results"></div>
+      </div>
+
+      <div style="padding: 1rem 3%;">
+        <div class="section-title"><h3>🍛 SIGNATURE DISHES</h3></div>
+        <div class="products-grid" id="food-grid"></div>
+
+        <div class="section-title" style="margin-top:3rem;"><h3>🥤 BEVERAGES & DESSERTS</h3></div>
+        <div class="products-grid" id="beverage-grid"></div>
+      </div>
+    </div>
+
+    <!-- ---------- SERVICES PAGE (separate) ---------- -->
+    <div id="services-page" class="page">
+      <div style="background: linear-gradient(145deg, var(--primary), var(--primary-dark)); padding: 3rem 5%; text-align: center; color: white;">
+        <h2><i class="fas fa-concierge-bell"></i> Our Services</h2>
+        <p>Beyond delivery: catering, events & more</p>
+      </div>
+      <div style="padding: 2rem 3%;">
+        <div class="services-grid" id="services-grid-container"></div>
+      </div>
+    </div>
+
+    <!-- ---------- CONTACT PAGE (separate) ---------- -->
+    <div id="contact-page" class="page">
+      <div style="background: linear-gradient(145deg, var(--primary), var(--primary-dark)); padding: 3rem 5%; text-align: center; color: white;">
+        <h2><i class="fas fa-headset"></i> Contact Us</h2>
+        <p>We're here 24/7 to satisfy your hunger</p>
+      </div>
+      <div style="padding: 2rem 3%;">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3 style="color: var(--primary-dark); margin-bottom:1.5rem;">Get In Touch</h3>
+            <div class="info-item"><div class="info-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Restaurant Hub</h4><p>Nungambakkam, Chennai - 600034</p></div></div>
+            <div class="info-item"><div class="info-icon"><i class="fas fa-phone-alt"></i></div><div><h4>Call us</h4><p>+91 98765 01234</p></div></div>
+            <div class="info-item"><div class="info-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p>food@chennaizomato.in</p></div></div>
+            <div class="info-item"><div class="info-icon"><i class="fas fa-clock"></i></div><div><h4>Delivery Hours</h4><p>8 AM - 11 PM (Mon-Sun)</p></div></div>
+          </div>
+          <div class="contact-form">
+            <h3 style="color: var(--primary-dark); margin-bottom:1.5rem;">Send Message</h3>
+            <form id="contactPageForm">
+              <input type="text" placeholder="Your Name" style="width:100%; padding:1rem; margin-bottom:1rem; border:2px solid #eee; border-radius:12px;">
+              <input type="email" placeholder="Email" style="width:100%; padding:1rem; margin-bottom:1rem; border:2px solid #eee; border-radius:12px;">
+              <textarea rows="3" placeholder="Your Message" style="width:100%; padding:1rem; margin-bottom:1rem; border:2px solid #eee; border-radius:12px;"></textarea>
+              <button class="btn" style="width:100%;" onclick="event.preventDefault(); showNotif('📧 Message sent!');">Send Message</button>
+            </form>
+          </div>
+        </div>
+        <div style="margin-top: 2.5rem; background: #ffe3d6; height: 250px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: var(--primary); border: 3px dashed var(--primary);">
+          <i class="fas fa-map" style="font-size:2rem;"></i> Google Map – Chennai Food District
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== FOOTER ========= -->
+    <footer style="background: var(--primary-dark); color: white; padding: 2.5rem 5% 1rem; margin-top: 2rem;">
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap:2rem;">
+        <div><h4 style="color: var(--secondary);">Chennai Zomato</h4><p style="opacity:0.9;">Serving since 2012. 1000+ restaurant partners.</p></div>
+        <div><h4 style="color: var(--secondary);">Quick Links</h4><ul style="list-style:none;"><li><a href="#" onclick="switchPage('home-page')" style="color:white;">Home</a></li><li><a href="#" onclick="switchPage('order-page')" style="color:white;">Order</a></li><li><a href="#" onclick="switchPage('services-page')" style="color:white;">Services</a></li></ul></div>
+        <div><h4 style="color: var(--secondary);">Explore</h4><ul style="list-style:none;"><li style="color:white;">Biryani</li><li style="color:white;">Pizza</li></ul></div>
+        <div><h4 style="color: var(--secondary);">Partner</h4><ul style="list-style:none;"><li style="color:white;">Catering</li><li style="color:white;">Chef on Demand</li></ul></div>
+      </div>
+      <div style="text-align:center; padding-top:2rem; margin-top:2rem; border-top:1px solid rgba(255,255,255,0.2);">© 2024 Chennai Zomato. Made with <i class="fas fa-heart" style="color:#ffd700;"></i> for foodies</div>
+    </footer>
+  </div> <!-- /.page-container -->
+
+  <!-- ========== BOTTOM MOBILE NAV ========= -->
+  <div class="bottom-nav">
+    <button class="nav-item active-bottom" data-page="home-page">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </button>
+    <button class="nav-item" data-page="order-page">
+      <i class="fas fa-pizza-slice"></i>
+      <span>Order</span>
+    </button>
+    <button class="nav-item" data-page="services-page">
+      <i class="fas fa-concierge-bell"></i>
+      <span>Services</span>
+    </button>
+    <button class="nav-item" data-page="contact-page">
+      <i class="fas fa-phone-alt"></i>
+      <span>Contact</span>
+    </button>
+  </div>
+
+  <!-- ========== CART SIDEBAR ========= -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+      <h3 style="color: var(--primary-dark);"><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+      <button id="closeCart" style="font-size:2rem; background:none; border:none; cursor:pointer;">&times;</button>
+    </div>
+    <div id="cartItems" style="flex:1; overflow-y:auto;"></div>
+    <div id="cartTotal" style="font-size:1.5rem; font-weight:bold; color:var(--primary-dark); margin:1rem 0;"></div>
+    <button class="btn" style="width:100%;" onclick="showNotif('🔒 Checkout simulation')">Checkout</button>
+  </div>
+
+  <!-- ========== NOTIFICATION ========= -->
+  <div class="notification" id="globalNotification"></div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script src="database.js"></script>
+</body>
+</html>
