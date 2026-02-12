@@ -238,11 +238,15 @@
 
     // --- NOTIFICATION ---
     function showNotif(msg) {
-      const n = document.getElementById('globalNotification');
-      n.textContent = msg;
-      n.classList.add('show');
-      setTimeout(()=>n.classList.remove('show'), 2800);
-    }
+  const n = document.getElementById('globalNotification');
+  n.textContent = msg;
+  n.classList.add('show');
+
+  setTimeout(() => {
+    n.classList.remove('show');
+  }, 1000); // 1000ms = 1 second
+}
+
 
     // --- EVENT LISTENERS ---
     window.onload = function() {
