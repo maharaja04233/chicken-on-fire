@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Zomato Chennai · Home Swiper + Separate Pages</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <!-- Font Awesome Icons (bottom nav, UI) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
@@ -16,13 +17,7 @@
 <body>
 
   <!-- animated food background (global) -->
-  <div class="food-bg-global">
-    <div class="food-float" style="top:5%; left:-5%; animation-delay:-1s;">🍕</div>
-    <div class="food-float" style="top:25%; left:-15%; animation-delay:-7s;">🍔</div>
-    <div class="food-float" style="top:55%; left:-8%; animation-delay:-4s;">🌮</div>
-    <div class="food-float" style="top:75%; left:-20%; animation-delay:-13s;">🍛</div>
-    <div class="food-float" style="top:15%; left:-22%; animation-delay:-19s;">🥗</div>
-  </div>
+  
 
   <!-- ========== PAGE CONTAINER ========= -->
   <div class="page-container">
@@ -98,16 +93,43 @@
         </div>
 
         <!-- process steps -->
-        <div class="section-title"><h3>⚡ HOW IT WORKS</h3></div>
-        <div style="display: grid; grid-template-columns: repeat(5,1fr); gap:1.2rem; margin:2rem 0;">
-          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-search"></i></div><h4>SEARCH</h4></div>
-          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-cart-plus"></i></div><h4>ORDER</h4></div>
-          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-fire"></i></div><h4>COOK</h4></div>
-          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-motorcycle"></i></div><h4>DELIVERY</h4></div>
-          <div style="text-align:center;"><div style="background:var(--primary); color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:2rem;"><i class="fas fa-utensils"></i></div><h4>ENJOY</h4></div>
-        </div>
-      </div>
+        <div class="section-title">
+  <h3>⚡ HOW IT WORKS</h3>
+</div>
+
+<!-- ===== PROCESS STEPS – FULLY RESPONSIVE & CENTER ALIGNED ===== -->
+<div class="process-steps-grid">
+  <!-- STEP 1 -->
+  <div class="process-step">
+    <div class="step-circle">
+      <i class="fas fa-search"></i>
     </div>
+    <h4>SEARCH</h4>
+  </div>
+  <!-- STEP 2 -->
+  <div class="process-step">
+    <div class="step-circle">
+      <i class="fas fa-cart-plus"></i>
+    </div>
+    <h4>ORDER</h4>
+  </div>
+  <!-- STEP 3 -->
+  <div class="process-step">
+    <div class="step-circle">
+      <i class="fas fa-fire"></i>
+    </div>
+    <h4>COOK</h4>
+  </div>
+  <!-- STEP 4 -->
+  <div class="process-step">
+    <div class="step-circle">
+      <i class="fas fa-motorcycle"></i>
+    </div>
+    <h4>DELIVERY</h4>
+  </div>
+  <!-- STEP 5 -->
+  
+</div>
 
     <!-- ---------- ORDER FOOD PAGE (separate) ---------- -->
     <div id="order-page" class="page">
