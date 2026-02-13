@@ -3,134 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chicken On Fire</title>
-
+<title>Menu - Chicken On Fire</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-
-/* BODY */
-body{
-  font-family:Arial, sans-serif;
-  margin:0;
-}
-
-.category-wrapper{
-  display: flex;
-  justify-content: center;   /* Center horizontally */
-  width: 100%;
-}
-
-/* CATEGORY SCROLL CONTAINER */
-.menu-categories{
-  display: flex;
-  gap: 25px;
-  padding: 20px 15px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  cursor: grab;
-  user-select: none;
-  justify-content: center;   /* Center items */
-  max-width: 1200px;         /* Control width on desktop */
-  width: 100%;
-}
-
-/* Hide scrollbar */
-.menu-categories::-webkit-scrollbar{
-  display: none;
-}
-
-/* CATEGORY CARD */
-.category-card{
-  min-width: 100px;
-  text-align: center;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.category-card img{
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid transparent;
-  transition: 0.3s ease;
-}
-
-.category-card span{
-  display: block;
-  margin-top: 8px;
-  font-weight: 600;
-  font-size: 15px;
-}
-
-/* Active State */
-.category-card.active img{
-  border: 3px solid red;
-  transform: scale(1.1);
-}
-
-/* MENU GRID */
-.menu-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.menu-card{
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.menu-card img{
-  width: 100%;
-  border-radius: 10px;
-}
-
-button{
-  padding: 8px 15px;
-  background: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* ✅ DESKTOP IMPROVEMENT */
-@media (min-width: 1024px){
-  .menu-categories{
-    overflow-x: hidden;   /* Remove scroll on desktop */
-  }
-}
-
-/* ✅ MOBILE OPTIMIZATION */
-@media (max-width: 768px){
-
-  .menu-categories{
-    justify-content: flex-start;  /* Left align for scroll */
-  }
-
-  .category-card{
-    min-width: 85px;
-  }
-
-  .category-card img{
-    width: 65px;
-    height: 65px;
-  }
-
-}
-
-
-</style>
-
 </head>
 <body>
 
-<!-- ================= DESKTOP HEADER ================= -->
 <header class="desktop-nav">
   <div class="logo">
     <img src="download (3).jfif" alt="Logo">
@@ -138,10 +16,10 @@ button{
   </div>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="menu.html">Menu</a>
+    <a href="#">Home</a>
+    <a href="#">Menu</a>
     <a href="#">Cart</a>
-    <a href="contact.html">Contact</a>
+    <a href="#">Contact</a>
    
    <a href="cart.html" class="desktop-cart">
 
@@ -164,55 +42,29 @@ button{
     <h2>Chicken On Fire</h2>
   </div>
 <!-- Left Cart Icon -->
-  <div class="mobile-cart">
+  <div class="mobile-cart" onclick="location.href='cart.html'">
+
     <i class="fas fa-shopping-cart"></i>
     <span id="mobile-cart-count">0</span>
   </div>
 </div>
 
+<section class="menu-page">
 
-<!-- ================= HERO SECTION ================= -->
-<section class="hero">
-  <h2>Spicy. Juicy. On Fire! 🔥</h2>
-  <p>Order your favorite grilled chicken now</p>
-  <button>Order Now</button>
-</section>
-
-<!-- ================= PRODUCTS SECTION ================= -->
-<section class="products">
-  <h2>Our Special Menu</h2>
-
- <!-- CATEGORY SLIDER -->
-  <div class="category-wrapper"></div>
-<div class="menu-categories" id="categoryScroll">
-
-  <div class="category-card active" data-category="all">
-    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
-    <span>All</span>
-  </div>
-
-  <div class="category-card" data-category="grill">
-    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
-    <span>Grill</span>
-  </div>
-
-  <div class="category-card" data-category="shawarma">
-    <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783">
-    <span>Shawarma</span>
-  </div>
-
-  <div class="category-card" data-category="juice">
-    <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888">
-    <span>Juice</span>
-  </div>
-
-  <div class="category-card" data-category="momos">
-    <img src="https://images.unsplash.com/photo-1625944230956-6b0b24b3316d">
-    <span>Momos</span>
-  </div>
-
+  <h2 class="menu-title">Our Delicious Menu 🔥</h2>
+  <div class="menu-search">
+  <input type="text" id="searchInput" placeholder="Search food... 🍗">
+  <i class="fas fa-search"></i>
 </div>
-</div>
+
+
+  <div class="menu-categories">
+    <button class="active" data-category="all">All</button>
+    <button data-category="grill">Grill</button>
+    <button data-category="burger">Burgers</button>
+    <button data-category="wings">Wings</button>
+    <button data-category="combo">Combo</button>
+  </div>
 
  <div class="menu-grid">
 
@@ -287,8 +139,6 @@ button{
 
 
 </section>
-
-<!-- ================= FOOTER ================= -->
 <footer class="footer">
 
   <div class="footer-container">
@@ -331,17 +181,18 @@ button{
 
 <!-- ================= MOBILE BOTTOM NAV ================= -->
 <div class="bottom-nav">
-  <a href="index.html">
+  <a href="#">
     <i class="fas fa-home"></i>
     <span>Home</span>
   </a>
 
-  <a href="menu.html">
+  <a href="#">
     <i class="fas fa-utensils"></i>
     <span>Menu</span>
   </a>
 
-  <a href="#">
+ <a href="cart.html">
+
     <i class="fas fa-shopping-cart"></i>
     <span>Cart</span>
   </a>
@@ -351,55 +202,9 @@ button{
     <span>Contact</span>
   </a>
 </div>
+
+
 <script src="menu.js"></script>
-<script>
-  /* TOUCH MOVE + DRAG SCROLL */
-const slider = document.getElementById("categoryScroll");
 
-let isDown = false;
-let startX;
-let scrollLeft;
-
-
-// mouse drag
-slider.addEventListener("mousedown", (e)=>{
-  isDown = true;
-  slider.style.cursor="grabbing";
-  startX = e.pageX - slider.offsetLeft;
-  scrollLeft = slider.scrollLeft;
-});
-
-slider.addEventListener("mouseleave", ()=>{
-  isDown = false;
-  slider.style.cursor="grab";
-});
-
-slider.addEventListener("mouseup", ()=>{
-  isDown = false;
-  slider.style.cursor="grab";
-});
-
-slider.addEventListener("mousemove", (e)=>{
-  if(!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - slider.offsetLeft;
-  const walk = (x - startX) * 2;
-  slider.scrollLeft = scrollLeft - walk;
-});
-
-
-// touch move mobile
-slider.addEventListener("touchstart", (e)=>{
-  startX = e.touches[0].pageX;
-  scrollLeft = slider.scrollLeft;
-});
-
-slider.addEventListener("touchmove", (e)=>{
-  const x = e.touches[0].pageX;
-  const walk = (x - startX) * 2;
-  slider.scrollLeft = scrollLeft - walk;
-});
-
-</script>
 </body>
 </html>

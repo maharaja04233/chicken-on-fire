@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flying Hen Endless Game</title>
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  background:#87CEEB;
+  font-family:sans-serif;
+}
+
+#game{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+}
+
+#hen{
+  position:absolute;
+  width:60px;
+  height:60px;
+  left:80px;
+  top:200px;
+  background:url('https://static.vecteezy.com/system/resources/thumbnails/071/487/580/small/happy-cartoon-white-chicken-standing-proudly-with-open-beak-vector.jpg') no-repeat center/contain;
+}
+
+.fire{
+  position:absolute;
+  width:70px;
+  height:70px;
+  background:url('data:image/jpeg;base64,/9j/...') no-repeat center/contain;
+}
+
+#score{
+  position:absolute;
+  top:10px;
+  left:10px;
+  font-size:24px;
+  font-weight:bold;
+}
+
+#gameOverScreen{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:40px;
+  color:red;
+  display:none;
+  text-align:center;
+}
+
+button{
+  font-size:20px;
+  padding:10px 20px;
+  margin-top:10px;
+  cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div id="game">
+
+  <div id="hen"></div>
+
+  <div id="score">Score: 0</div>
+
+  <div id="gameOverScreen">
+    Game Over<br>
+    <button onclick="restartGame()">Restart</button>
+  </div>
+
+</div>
+
+<script>
+
+const hen = document.getElementById("hen");
+const game = document.getElementById("game");
+const scoreText = document.getElementById("score");
+const gameOverScreen = document.getElementById("gameOverScreen");
+
+let henY = 200;
+let velocity = 0;
+let gravity = 0.6;
+let flyPower = -11;
+
+let fires = [];
+
+let score = 0;
+let speed = 4;
+let gameOver = false;
+
+function fly(){
+  if(!gameOver){
+    velocity = flyPower;
+  }
+}
+
+document.addEventListener("click", fly);
+document.addEventListener("touchstart", fly);
+
+function createFire(){
+
+  if(gameOver) return;
+
+  const fire = document.createElement("div");
+
+  fire.classList.add("fire");
+
+  fire.style.left = window.innerWidth + "px";
+
+  fire.style.top =
+    Math.random() * (window.innerHeight - 100) + "px";
+
+  game.appendChild(fire);
+
+  fires.push(fire);
+
+}
+
+setInterval(createFire, 1500);
+
+
+function update(){
+
+  if(gameOver) return;
+
+  velocity += gravity;
+
+  henY += velocity;
+
+  if(henY < 0) henY = 0;
+
+  if(henY > window.innerHeight - 60)
+      henY = window.innerHeight - 60;
+
+  hen.style.top = henY + "px";
+
+
+  fires.forEach((fire,index)=>{
+
+    let fireX = fire.offsetLeft;
+
+    fireX -= speed;
+
+    fire.style.left = fireX + "px";
+
+
+    if(
+      fireX < hen.offsetLeft + 60 &&
+      fireX + 70 > hen.offsetLeft &&
+      fire.offsetTop < henY + 60 &&
+      fire.offsetTop + 70 > henY
+    ){
+      endGame();
+    }
+
+
+    if(fireX < -70){
+
+      fire.remove();
+
+      fires.splice(index,1);
+
+      score++;
+
+      scoreText.innerText = "Score: " + score;
+
+    }
+
+  });
+
+
+  if(score % 10 === 0){
+    speed += 0.002;
+  }
+
+
+  requestAnimationFrame(update);
+
+}
+
+update();
+
+
+function endGame(){
+
+  gameOver = true;
+
+  gameOverScreen.style.display = "block";
+
+}
+
+
+function restartGame(){
+
+  location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
