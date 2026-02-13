@@ -5,10 +5,10 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 
 // ===============================
-// CATEGORY FILTER
+// CATEGORY FILTER (TOP BUTTONS)
 // ===============================
 const buttons = document.querySelectorAll(".menu-categories button");
-const cards = document.querySelectorAll(".menu-card");
+const menuCards = document.querySelectorAll(".menu-card");
 
 buttons.forEach(button => {
 
@@ -19,7 +19,7 @@ buttons.forEach(button => {
 
     const category = button.dataset.category;
 
-    cards.forEach(card => {
+    menuCards.forEach(card => {
 
       if (category === "all" || card.dataset.category === category) {
         card.style.display = "block";
@@ -45,7 +45,7 @@ if(searchInput){
 
     let value = this.value.toLowerCase();
 
-    document.querySelectorAll(".menu-card").forEach(card=>{
+    menuCards.forEach(card=>{
 
       let name = card.querySelector("h3").innerText.toLowerCase();
 
@@ -71,6 +71,7 @@ document.querySelectorAll(".add-cart").forEach(button=>{
 
     let name = button.dataset.name;
     let price = parseInt(button.dataset.price);
+    let image = button.dataset.image; // ✅ FIXED
 
     let existingItem = cart.find(item => item.name === name);
 
@@ -83,9 +84,8 @@ document.querySelectorAll(".add-cart").forEach(button=>{
       cart.push({
         name: name,
         price: price,
-        image:image,
+        image: image,
         qty: 1,
-
       });
 
     }
@@ -159,25 +159,20 @@ function showToast(message){
 
 
 // ===============================
-// LOAD CART COUNT ON PAGE LOAD
+// CATEGORY FILTER (CATEGORY CARD)
 // ===============================
-updateCartCount();
+const categoryCards = document.querySelectorAll(".category-card");
 
-
-/* CATEGORY FILTER */
-const categories = document.querySelectorAll(".category-card");
-const cards = document.querySelectorAll(".menu-card");
-
-categories.forEach(category => {
+categoryCards.forEach(category => {
 
   category.addEventListener("click", () => {
 
-    categories.forEach(c => c.classList.remove("active"));
+    categoryCards.forEach(c => c.classList.remove("active"));
     category.classList.add("active");
 
     const value = category.dataset.category;
 
-    cards.forEach(card => {
+    menuCards.forEach(card => {
 
       if(value === "all" || card.dataset.category === value){
         card.style.display="block";
@@ -193,49 +188,7 @@ categories.forEach(category => {
 });
 
 
-/* TOUCH MOVE + DRAG SCROLL */
-const slider = document.getElementById("categoryScroll");
-
-let isDown = false;
-let startX;
-let scrollLeft;
-
-
-// mouse drag
-slider.addEventListener("mousedown", (e)=>{
-  isDown = true;
-  slider.style.cursor="grabbing";
-  startX = e.pageX - slider.offsetLeft;
-  scrollLeft = slider.scrollLeft;
-});
-
-slider.addEventListener("mouseleave", ()=>{
-  isDown = false;
-  slider.style.cursor="grab";
-});
-
-slider.addEventListener("mouseup", ()=>{
-  isDown = false;
-  slider.style.cursor="grab";
-});
-
-slider.addEventListener("mousemove", (e)=>{
-  if(!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - slider.offsetLeft;
-  const walk = (x - startX) * 2;
-  slider.scrollLeft = scrollLeft - walk;
-});
-
-
-// touch move mobile
-slider.addEventListener("touchstart", (e)=>{
-  startX = e.touches[0].pageX;
-  scrollLeft = slider.scrollLeft;
-});
-
-slider.addEventListener("touchmove", (e)=>{
-  const x = e.touches[0].pageX;
-  const walk = (x - startX) * 2;
-  slider.scrollLeft = scrollLeft - walk;
-});
+// ===============================
+// LOAD CART COUNT ON PAGE LOAD
+// ===============================
+updateCartCount();
