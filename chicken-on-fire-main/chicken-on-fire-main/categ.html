@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chicken On Fire</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* CATEGORY WRAPPER (for desktop centering) */
+.category-wrapper{
+  display: flex;
+  justify-content: center;   /* Center horizontally */
+  width: 100%;
+}
+
+/* CATEGORY SCROLL CONTAINER */
+.menu-categories{
+  display: flex;
+  gap: 25px;
+  padding: 20px 15px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  cursor: grab;
+  user-select: none;
+  justify-content: center;   /* Center items */
+  max-width: 1200px;         /* Control width on desktop */
+  width: 100%;
+}
+
+/* Hide scrollbar */
+.menu-categories::-webkit-scrollbar{
+  display: none;
+}
+
+/* CATEGORY CARD */
+.category-card{
+  min-width: 100px;
+  text-align: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.category-card img{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  transition: 0.3s ease;
+}
+
+.category-card span{
+  display: block;
+  margin-top: 8px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Active State */
+.category-card.active img{
+  border: 3px solid red;
+  transform: scale(1.1);
+}
+
+/* MENU GRID */
+.menu-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.menu-card{
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.menu-card img{
+  width: 100%;
+  border-radius: 10px;
+}
+
+button{
+  padding: 8px 15px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ✅ DESKTOP IMPROVEMENT */
+@media (min-width: 1024px){
+  .menu-categories{
+    overflow-x: hidden;   /* Remove scroll on desktop */
+  }
+}
+
+/* ✅ MOBILE OPTIMIZATION */
+@media (max-width: 768px){
+
+  .menu-categories{
+    justify-content: flex-start;  /* Left align for scroll */
+  }
+
+  .category-card{
+    min-width: 85px;
+  }
+
+  .category-card img{
+    width: 65px;
+    height: 65px;
+  }
+
+}
+
+</style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Our Menu</h2>
+
+<!-- CATEGORY SLIDER -->
+<div class="menu-categories" id="categoryScroll">
+
+  <div class="category-card active" data-category="all">
+    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+    <span>All</span>
+  </div>
+
+  <div class="category-card" data-category="grill">
+    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+    <span>Grill</span>
+  </div>
+
+  <div class="category-card" data-category="shawarma">
+    <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783">
+    <span>Shawarma</span>
+  </div>
+
+  <div class="category-card" data-category="juice">
+    <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888">
+    <span>Juice</span>
+  </div>
+
+  <div class="category-card" data-category="momos">
+    <img src="https://images.unsplash.com/photo-1625944230956-6b0b24b3316d">
+    <span>Momos</span>
+  </div>
+
+</div>
+
+
+
+
+<script>
+
+/* CATEGORY FILTER */
+const categories = document.querySelectorAll(".category-card");
+const cards = document.querySelectorAll(".menu-card");
+
+categories.forEach(category => {
+
+  category.addEventListener("click", () => {
+
+    categories.forEach(c => c.classList.remove("active"));
+    category.classList.add("active");
+
+    const value = category.dataset.category;
+
+    cards.forEach(card => {
+
+      if(value === "all" || card.dataset.category === value){
+        card.style.display="block";
+      }
+      else{
+        card.style.display="none";
+      }
+
+    });
+
+  });
+
+});
+
+
+/* TOUCH MOVE + DRAG SCROLL */
+const slider = document.getElementById("categoryScroll");
+
+let isDown = false;
+let startX;
+let scrollLeft;
+
+
+// mouse drag
+slider.addEventListener("mousedown", (e)=>{
+  isDown = true;
+  slider.style.cursor="grabbing";
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener("mouseleave", ()=>{
+  isDown = false;
+  slider.style.cursor="grab";
+});
+
+slider.addEventListener("mouseup", ()=>{
+  isDown = false;
+  slider.style.cursor="grab";
+});
+
+slider.addEventListener("mousemove", (e)=>{
+  if(!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX) * 2;
+  slider.scrollLeft = scrollLeft - walk;
+});
+
+
+// touch move mobile
+slider.addEventListener("touchstart", (e)=>{
+  startX = e.touches[0].pageX;
+  scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener("touchmove", (e)=>{
+  const x = e.touches[0].pageX;
+  const walk = (x - startX) * 2;
+  slider.scrollLeft = scrollLeft - walk;
+});
+
+</script>
+
+</body>
+</html>

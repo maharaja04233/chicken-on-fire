@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Your Cart - Chicken On Fire</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link rel="stylesheet" href="style.css">
+<style>
+
+/* GLOBAL */
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f5f5f5;
+overflow-x:hidden;
+}
+
+/* PAGE */
+.cart-page{
+width:100%;
+max-width:900px;
+margin:auto;
+padding:15px;
+}
+
+.cart-title{
+text-align:center;
+margin-bottom:20px;
+font-size:24px;
+}
+
+/* CART ITEM */
+.cart-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#fff;
+padding:12px;
+margin-bottom:12px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* LEFT SIDE */
+.cart-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+/* IMAGE */
+.cart-img{
+width:65px;
+height:65px;
+object-fit:cover;
+border-radius:8px;
+}
+
+/* INFO */
+.cart-info{
+display:flex;
+flex-direction:column;
+}
+
+.cart-name{
+font-weight:bold;
+font-size:16px;
+}
+
+.cart-price{
+color:#666;
+font-size:14px;
+}
+
+/* QTY BOX */
+.qty-box{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.qty-btn{
+background:#ff5722;
+color:#fff;
+border:none;
+padding:6px 10px;
+cursor:pointer;
+border-radius:5px;
+font-size:16px;
+}
+
+.remove-btn{
+background:red;
+color:#fff;
+border:none;
+padding:6px 10px;
+cursor:pointer;
+border-radius:5px;
+}
+
+/* SUMMARY */
+.cart-summary{
+text-align:center;
+margin-top:20px;
+}
+
+.total-price{
+font-size:22px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.checkout-btn{
+background:green;
+color:#fff;
+border:none;
+padding:12px 25px;
+cursor:pointer;
+border-radius:5px;
+font-size:16px;
+}
+
+/* EMPTY */
+.empty-cart{
+text-align:center;
+color:#777;
+font-size:18px;
+padding:30px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.cart-item{
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+}
+
+.qty-box{
+width:100%;
+justify-content:space-between;
+}
+
+.cart-img{
+width:55px;
+height:55px;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+<header class="desktop-nav">
+  <div class="logo">
+    <img src="download (3).jfif" alt="Logo">
+    <h1>Chicken On Fire</h1>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="#">Cart</a>
+    <a href="contact.html">Contact</a>
+   
+   <a href="cart.html" class="desktop-cart">
+
+  <i class="fas fa-shopping-cart"></i>
+  <span id="cart-count">0</span>
+</a>
+
+
+  </nav>
+</header>
+
+
+<section class="cart-page">
+
+<h2 class="cart-title">🛒 Your Cart</h2>
+
+<div id="cart-items"></div>
+
+<div class="cart-summary">
+
+<div class="total-price">
+Total: ₹<span id="total">0</span>
+</div>
+
+<button class="checkout-btn" onclick="goToCheckout()">
+Proceed to Checkout
+</button>
+
+</div>
+
+</section>
+
+
+<script>
+
+// LOAD CART
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let container = document.getElementById("cart-items");
+
+
+// RENDER CART
+function renderCart(){
+
+container.innerHTML = "";
+
+let total = 0;
+
+if(cart.length === 0){
+
+container.innerHTML =
+`<div class="empty-cart">
+Your cart is empty 😔
+</div>`;
+
+document.getElementById("total").innerText = 0;
+
+return;
+
+}
+
+
+cart.forEach((item,index)=>{
+
+if(!item.qty) item.qty = 1;
+
+total += item.price * item.qty;
+
+container.innerHTML += `
+
+<div class="cart-item">
+
+<div class="cart-left">
+
+<img src="${item.image}" class="cart-img">
+
+<div class="cart-info">
+
+<div class="cart-name">${item.name}</div>
+
+<div class="cart-price">₹${item.price}</div>
+
+</div>
+
+</div>
+
+
+<div class="qty-box">
+
+<button class="qty-btn" onclick="decreaseQty(${index})">-</button>
+
+<span>${item.qty}</span>
+
+<button class="qty-btn" onclick="increaseQty(${index})">+</button>
+
+<button class="remove-btn" onclick="removeItem(${index})">
+<i class="fas fa-trash"></i>
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("total").innerText = total;
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+}
+
+
+// INCREASE QTY
+function increaseQty(index){
+
+cart[index].qty++;
+
+renderCart();
+
+}
+
+
+// DECREASE QTY
+function decreaseQty(index){
+
+if(cart[index].qty > 1){
+
+cart[index].qty--;
+
+}else{
+
+cart.splice(index,1);
+
+}
+
+renderCart();
+
+}
+
+
+// REMOVE ITEM
+function removeItem(index){
+
+cart.splice(index,1);
+
+renderCart();
+
+}
+
+
+// CHECKOUT
+function goToCheckout(){
+
+if(cart.length === 0){
+
+alert("Cart is empty!");
+
+return;
+
+}
+
+window.location.href = "checkout.html";
+
+}
+
+
+// LOAD
+renderCart();
+
+</script>
+<div class="bottom-nav">
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+
+  <a href="menu.html">
+    <i class="fas fa-utensils"></i>
+    <span>Menu</span>
+  </a>
+
+  <a href="cart.html">
+    <i class="fas fa-shopping-cart"></i>
+    <span>Cart</span>
+  </a>
+
+  <a href="#">
+    <i class="fas fa-phone"></i>
+    <span>Contact</span>
+  </a>
+</div>
+
+<script src="menu.js"></script>
+</body>
+</html>

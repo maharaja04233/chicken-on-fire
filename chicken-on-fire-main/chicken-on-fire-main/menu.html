@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu - Chicken On Fire</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="desktop-nav">
+  <div class="logo">
+    <img src="download (3).jfif" alt="Logo">
+    <h1>Chicken On Fire</h1>
+  </div>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Menu</a>
+    <a href="#">Cart</a>
+    <a href="#">Contact</a>
+   
+   <a href="cart.html" class="desktop-cart">
+
+  <i class="fas fa-shopping-cart"></i>
+  <span id="cart-count">0</span>
+</a>
+
+
+  </nav>
+</header>
+
+<!-- ================= MOBILE TOP BAR ================= -->
+<div class="mobile-top">
+
+  
+
+  <!-- Center Logo -->
+  <div class="mobile-logo">
+    <img src="download (3).jfif" alt="Logo">
+    <h2>Chicken On Fire</h2>
+  </div>
+<!-- Left Cart Icon -->
+  <div class="mobile-cart" onclick="location.href='cart.html'">
+
+    <i class="fas fa-shopping-cart"></i>
+    <span id="mobile-cart-count">0</span>
+  </div>
+</div>
+
+<section class="menu-page">
+
+  <h2 class="menu-title">Our Delicious Menu 🔥</h2>
+  <div class="menu-search">
+  <input type="text" id="searchInput" placeholder="Search food... 🍗">
+  <i class="fas fa-search"></i>
+</div>
+
+
+  <div class="menu-categories">
+    <button class="active" data-category="all">All</button>
+    <button data-category="grill">Grill</button>
+    <button data-category="burger">Burgers</button>
+    <button data-category="wings">Wings</button>
+    <button data-category="combo">Combo</button>
+  </div>
+
+ <div class="menu-grid">
+
+  <!-- Grilled Chicken -->
+  <div class="menu-card" data-category="grill">
+    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349" alt="">
+    <h3>Grilled Chicken</h3>
+    <p>Spicy charcoal grilled chicken</p>
+    <div class="menu-bottom">
+      <span>₹299</span>
+      <button class="add-cart"
+        data-name="Grilled Chicken"
+        data-price="299">
+        <i class="fas fa-shopping-cart"
+        data-image="https://images.unsplash.com/photo-1550547660-d9450f859349"></i> Add
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Spicy Wings -->
+  <div class="menu-card" data-category="wings">
+    <img src="https://images.unsplash.com/photo-1606756790138-261d2b21cd1d" alt="">
+    <h3>Spicy Wings</h3>
+    <p>Crispy & hot chicken wings</p>
+    <div class="menu-bottom">
+      <span>₹199</span>
+      <button class="add-cart"
+        data-name="Spicy Wings"
+        data-price="199">
+        <i class="fas fa-shopping-cart"
+         data-image="https://images.unsplash.com/photo-1550547660-d9450f859349"></i> Add
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Chicken Burger -->
+  <div class="menu-card" data-category="burger">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" alt="">
+    <h3>Chicken Burger</h3>
+    <p>Juicy grilled chicken burger</p>
+    <div class="menu-bottom">
+      <span>₹149</span>
+      <button class="add-cart"
+        data-name="Chicken Burger"
+        data-price="149">
+        <i class="fas fa-shopping-cart"
+         data-image="https://images.unsplash.com/photo-1550547660-d9450f859349"></i> Add
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Family Combo -->
+  <div class="menu-card" data-category="combo">
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="">
+    <h3>Family Combo</h3>
+    <p>Chicken + Fries + Drinks</p>
+    <div class="menu-bottom">
+      <span>₹599</span>
+      <button class="add-cart"
+        data-name="Family Combo"
+        data-price="599">
+        <i class="fas fa-shopping-cart"
+         data-image="https://images.unsplash.com/photo-1550547660-d9450f859349"></i> Add
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+</section>
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <div class="footer-box">
+      <h3>🔥 Chicken On Fire</h3>
+      <p>Serving hot & spicy grilled chicken with unbeatable taste. Fresh ingredients, fast delivery & fiery flavors!</p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Offers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact Us</h3>
+      <p>📍 Chennai, Tamil Nadu</p>
+      <p>📞 +91 98765 43210</p>
+      <p>📧 info@chickenonfire.com</p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Subscribe</h3>
+      <input type="email" placeholder="Enter your email">
+      <button>Subscribe</button>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Chicken On Fire | Designed with ❤️</p>
+  </div>
+
+</footer>
+
+<!-- ================= MOBILE BOTTOM NAV ================= -->
+<div class="bottom-nav">
+  <a href="#">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+
+  <a href="#">
+    <i class="fas fa-utensils"></i>
+    <span>Menu</span>
+  </a>
+
+ <a href="cart.html">
+
+    <i class="fas fa-shopping-cart"></i>
+    <span>Cart</span>
+  </a>
+
+  <a href="#">
+    <i class="fas fa-phone"></i>
+    <span>Contact</span>
+  </a>
+</div>
+
+
+<script src="menu.js"></script>
+
+</body>
+</html>
