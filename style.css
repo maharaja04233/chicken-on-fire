@@ -229,34 +229,101 @@ body{
 /* Default (Desktop) */
 
 
-/* 📱 Mobile View - 3 Cards in One Row */
-@media (max-width: 768px) {
-  .menu-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+  /* Hide desktop */
+  .desktop-nav{
+    display:none;
   }
 
-  .menu-card {
-    padding: 10px;
+  /* Mobile Header */
+  .mobile-top{
+    background:var(--dark);
+    padding:15px 5%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
   }
 
-  .menu-card h3 {
-    font-size: 14px;
+  .mobile-logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
   }
 
-  .menu-card p {
-    font-size: 12px;
+  .mobile-logo img{
+    width:40px;
+    height:40px;
+    border-radius:50%;
   }
 
-  .menu-card span {
-    font-size: 13px;
+  .mobile-logo h2{
+    color:var(--accent);
+    font-size:18px;
   }
 
-  .menu-card button {
-    font-size: 12px;
-    padding: 5px 8px;
+  .mobile-cart{
+    position:absolute;
+    right:15px;
+    font-size:20px;
+    color:#fff;
   }
-}
+
+  .mobile-cart span{
+    position:absolute;
+    top:-8px;
+    right:-10px;
+    background:red;
+    color:#fff;
+    font-size:11px;
+    padding:2px 6px;
+    border-radius:50%;
+  }
+
+  /* 🔥 ZOMATO STYLE GRID */
+  .menu-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+
+  .menu-card{
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+  }
+
+  .menu-card img{
+    height:100px;
+  }
+
+  .menu-card h3{
+    font-size:13px;
+    padding:5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .menu-card p{
+    display:none;
+  }
+
+  .menu-bottom{
+    padding:8px;
+  }
+
+  .menu-bottom span{
+    font-size:12px;
+  }
+
+  .menu-bottom button{
+    font-size:11px;
+    padding:4px 8px;
+    border-radius:12px;
+  }
+
 /* ================= FOOTER ================= */
 
 .footer{
@@ -512,3 +579,4 @@ body{
     grid-template-columns:1fr;
   }
 }
+
